@@ -1,26 +1,96 @@
 package ScenarioBasedProblemsOOPs.Encapsulation_And_Abstraction;
 
-abstract class FoodItem{
-    private String itemName; private double price; private int quantity;
-    public FoodItem(String n,double p,int q){itemName=n;price=p;quantity=q;}
-    public double getPrice(){return price;} public int getQuantity(){return quantity;}
+abstract class FoodItem {
+
+    private String itemName;
+    private double price;
+    private int quantity;
+
+    public FoodItem(String itemName, double price, int quantity) {
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public abstract double calculateTotalPrice();
-    public void displayItemDetails(){System.out.println(itemName+" "+price+" "+quantity);}
+
+    public void displayItemDetails() {
+        System.out.println("Item Name : " + itemName);
+        System.out.println("Price : ₹" + price);
+        System.out.println("Quantity : " + quantity);
+    }
 }
-class VegItem extends FoodItem{
-    public VegItem(String n,double p,int q){super(n,p,q);}
-    public double calculateTotalPrice(){return getPrice()*getQuantity();}
+
+class VegItem extends FoodItem {
+
+    public VegItem(String itemName, double price, int quantity) {
+        super(itemName, price, quantity);
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        return getPrice() * getQuantity();
+    }
 }
-class NonVegItem extends FoodItem{
-    private double serviceCharge=50;
-    public NonVegItem(String n,double p,int q){super(n,p,q);}
-    public double calculateTotalPrice(){return getPrice()*getQuantity()+serviceCharge;}
+
+class NonVegItem extends FoodItem {
+
+    private double serviceCharge;
+
+    public NonVegItem(String itemName, double price, int quantity, double serviceCharge) {
+        super(itemName, price, quantity);
+        this.serviceCharge = serviceCharge;
+    }
+
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public void setServiceCharge(double serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        return (getPrice() * getQuantity()) + serviceCharge;
+    }
 }
-public class OnlineFoodDeliverySystem{
-    public static void main(String[] args){
-        FoodItem v=new VegItem("Paneer",200,2);
-        FoodItem nv=new NonVegItem("Chicken",300,2);
-        System.out.println(v.calculateTotalPrice());
-        System.out.println(nv.calculateTotalPrice());
+
+public class OnlineFoodDeliverySystem {
+
+    public static void main(String[] args) {
+
+        FoodItem vegItem = new VegItem("Paneer Butter Masala", 200, 2);
+        FoodItem nonVegItem = new NonVegItem("Chicken Biryani", 300, 2, 50);
+
+        vegItem.displayItemDetails();
+        System.out.println("Total Price : ₹" + vegItem.calculateTotalPrice());
+        System.out.println();
+        nonVegItem.displayItemDetails();
+        System.out.println("Total Price : ₹" + nonVegItem.calculateTotalPrice());
     }
 }
