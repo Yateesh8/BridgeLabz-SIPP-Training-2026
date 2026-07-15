@@ -1,0 +1,2 @@
+import java.util.*;
+public class YoungestAndTallestFriend { public static void main(String[] args){ Scanner sc=new Scanner(System.in); int aa=sc.nextInt(), ab=sc.nextInt(), an=sc.nextInt(); double ha=sc.nextDouble(), hb=sc.nextDouble(), hn=sc.nextDouble(); String youngest=(aa<=ab&&aa<=an)?"Amar":(ab<=an?"Akbar":"Anthony"); String tallest=(ha>=hb&&ha>=hn)?"Amar":(hb>=hn?"Akbar":"Anthony"); System.out.println("Youngest Friend: "+youngest); System.out.println("Tallest Friend: "+tallest); } }
